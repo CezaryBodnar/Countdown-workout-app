@@ -6,7 +6,7 @@ import Exercise from './Exercise';
 
 
 function App() {
-  const [seconds, setSeconds] = useState(45);
+  const [seconds, setSeconds] = useState(5);
   const [breaks, setBreaks] = useState(15);
   const [toggleButton, settoggleButton] = useState(false);
   const [hideTime, sethideTime] = useState(true)
@@ -27,7 +27,24 @@ function App() {
   const reset = () => {
     setSeconds(45);
     setBreaks(15);
+  }
 
+  const next = () => {
+    const imgLength = workout.length;
+    const newPointer = pointer === imgLength - 1 ? 0 : pointer + 1;
+    setPointer(newPointer);
+    setSeconds(45);
+    setBreaks(0);
+    settoggleButton(!toggleButton);
+  }
+
+  const previous = () => {
+    const imgLength = workout.length;
+    const newPointer = pointer === 0 ? imgLength - 1 : pointer - 1;
+    setPointer(newPointer);
+    setSeconds(45);
+    setBreaks(0);
+    settoggleButton(!toggleButton);
   }
 
   useEffect(() => {
@@ -71,20 +88,6 @@ function App() {
 
   const secondsRadius = mapNumber(seconds, 45, 0, 0, 360);
   const breaksRadius = mapNumber(breaks, 15, 0, 0, 360);
-
-  const next = () => {
-    const imgLength = workout.length;
-    const newPointer = pointer === imgLength - 1 ? 0 : pointer + 1;
-    setPointer(newPointer);
-    setSeconds(45);
-  }
-
-  const previous = () => {
-    const imgLength = workout.length;
-    const newPointer = pointer === 0 ? imgLength - 1 : pointer - 1;
-    setPointer(newPointer);
-    setSeconds(45);
-  }
 
   return (
     <div className="container">
